@@ -10,7 +10,18 @@ class LoginForm(AuthenticationForm):
 class RegisterForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'age', 'city', 'avatar']
+        fields = [
+            'username',
+            'password1',
+            'password2',
+            'first_name',
+            'last_name',
+            'email',
+            'age',
+            'city',
+            'avatar',
+            'is_superuser'
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
