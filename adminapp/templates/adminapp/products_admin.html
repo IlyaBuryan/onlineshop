@@ -1,0 +1,78 @@
+{% extends 'adminapp/layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+{% block main %}
+
+{% if title == 'admin:products' %}
+<div class="container">
+    <div class="categories_list">
+        <button class="btn btn-success new-user-button">
+            <a href="{% url 'useradmin:products_create' category_pk %}">New product</a>
+        </button>
+        {% for object in object_list %}
+        <div class="category_record">
+            <div class="category_desc">
+                <div class="ava_wrapper">
+                    <img src="/media/{{ object.image }}" alt="{{ object.name|title }}">
+                </div>
+                <div class="product_name">
+                    <div class="summary">
+                        <span>{{ object.name|title }}</span>
+                        <b>Price</b>
+                        <p>{{ object.price }} руб</p>
+                        <b>Quantity</b>
+                        <p>{{ object.number }}</p>
+                    </div>
+                    <div class="product_desc">
+                        {{ object.description|title }}
+                    </div>
+                </div>
+            </div>
+            <div class="category_buttons product_buttons">
+                <a href="{% url 'useradmin:product' object.pk %}" class="btn btn-primary">Product:view</a>
+                <a href="{% url 'useradmin:products_update' object.category_id object.pk %}" class="btn btn-warning">Product:update</a>
+                <a href="{% url 'useradmin:products_delete' object.category_id object.pk %}" class="btn btn-danger">Product:delete</a>
+            </div>
+        </div>
+        {% endfor%}
+    </div>
+</div>
+{% endif %}
+
+{% if title == 'products:create' or title == 'products:update' %}
+<div class="container category_use">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary form-control" type="submit" value="Save">
+    </form>
+    <button class="btn btn-warning form-control last">
+        <a href="{% url 'useradmin:products_read' category_pk %}">
+            Back to products
+        </a>
+    </button>
+</div>
+{% endif %}
+
+{% if title == 'products:delete' %}
+<div class="container user_forms">
+    <div class="user_delete">
+        <span><b>Delete {{ object.name }}?</b></span>
+        <form action="{% url 'useradmin:products_delete' category_pk object.pk %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="DELETE">
+        </form>
+        <button class="btn btn-warning">
+            <a href="{% url 'useradmin:products_read' category_pk %}">
+                Cancel
+            </a>
+        </button>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

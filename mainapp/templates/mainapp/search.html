@@ -1,0 +1,55 @@
+{% extends 'mainapp/layouts/layout.html' %}
+{% load static %}
+{% load medias %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+
+{% block prod_nav %}
+{% include 'mainapp/layouts/products_nav.html' %}
+{% endblock %}
+
+
+{% block main %}
+
+
+<div class="container product-content">
+    {% if products %}
+    <div class="paginator">
+        {% if products.has_previous %}
+        <a href="{% url 'main:search' %}?products={{ text }}&page={{ products.previous_page_number }}"> Back </a>
+        {% endif %}
+        <span class="current">
+        {{ products.number }} of
+        {{ products.paginator.num_pages }}
+    </span>
+        {% if products.has_next %}
+        <a href="{% url 'main:search' %}?products={{ text }}&page={{ products.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    {% for i in products %}
+    <div class="tab-content">
+        <div class="block">
+            <a href="{% url 'main:single' i.pk %}">
+                <div class="img_container">
+                    <img src="{{ i.image|media_folder }}" alt="product">
+                </div>
+                <div class="text">
+                    <h4>To the purchase</h4>
+                    <p>{{ i.category|title }}</p>
+                    <p>{{ i.name|capfirst }}</p>
+                    <p>{{ i.price }} $</p>
+                </div>
+            </a>
+            <p>{{ i.name|capfirst }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3>Empty search result</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

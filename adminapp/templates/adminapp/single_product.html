@@ -1,0 +1,25 @@
+{% extends 'adminapp/layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <div class="single_product">
+        <img src="/media/{{ object.image }}" class="single_product_img">
+        <div class="single_product_desc">
+            <p><b>Category:</b> {{ object.category }}</p>
+            <p><b>Name:</b> {{ object.name }}</p>
+            <p><b>Description:</b> {{ object.description }}</p>
+            <p><b>Price:</b> {{ object.price }}</p>
+            <p><b>Number:</b> {{ object.number }}</p>
+            <p><b>Date_add:</b> {{ object.date_add }}</p>
+            <p><b>Date_update:</b> {{ object.date_update }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

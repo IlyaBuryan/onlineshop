@@ -1,0 +1,46 @@
+{% extends 'mainapp/layouts/layout.html'%}
+{% load static %}
+
+{% block title%}
+{{ title|capfirst }}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+	<a href="{% url 'main:products' %}">
+		<div class="banner"></div>
+	</a>
+	<div class="popular">
+		<div class="featured">
+			<div class="featured-menu">
+				<div class="choice">
+					<a class="active">Popular</a>
+				</div>
+				<a class="explore" href="{% url 'main:products' %}">Show all <img src="{% static 'img/arrow.png' %}"
+						alt="arrow"></a>
+			</div>
+			<div class="tab-content">
+				{% for i in products %}
+
+				<div class="block">
+					<a href="{% url 'main:single' i.pk %}">
+						<div class="img_container">
+							<img src="/media/{{ i.image }}" alt="product">
+						</div>
+						<div class="text">
+							<h4>To the purchase</h4>
+							<p>{{ i.category|title }}</p>
+							<p>{{ i.name|capfirst }}</p>
+							<p>{{ i.price }} $</p>
+						</div>
+					</a>
+					<p>{{ i.name|capfirst }}</p>
+				</div>
+
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'mainapp/layouts/layout.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+
+{% block prod_nav %}
+{% include 'mainapp/layouts/products_nav.html' %}
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <span class="hot-offer">Hurry to buy!!!!!</span>
+    <div class="details-products">
+        <div class="details-slider">
+            <div class="slider-product">
+                <img src="/media/{{ product_hot.image }}" alt="{{ product_hot.name }}">
+            </div>
+        </div>
+        <div class="description">
+            <h3 class="big-bold">{{ product_hot.name|capfirst }}</h3>
+            <h3 class="red">Hot offer</h3>
+            <p class="price">{{ product_hot.price }}<span> $</span></p>
+            <a href="{% url 'basket:add' product_hot.pk %}" class="red-button">
+                Purchase <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            <div class="description-text">
+                <p>{{ product_hot.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="similar">
+        <div class="featured">
+            <div class="featured-menu">
+                <div class="choice">
+                    <a class="active">See other products</a>
+                </div>
+                <a class="explore" href="{% url 'main:category' 0 %}">Show all <img src="{% static 'img/arrow.png' %}"
+                        alt="arrow"></a>
+            </div>
+            <div class="tab-content">
+
+                {% for i in other %}
+                <div class="block">
+                    <a href="{% url 'main:single' i.pk %}">
+                        <div class="img_container">
+                            <img src="/media/{{ i.image }}" alt="product">
+                        </div>
+                        <div class="text">
+                            <h4>To the purchase</h4>
+                            <p>{{ i.category|title }}</p>
+                            <p>{{ i.name|capfirst }}</p>
+                            <p>{{ i.price }} $</p>
+                        </div>
+                    </a>
+                    <p>Product</p>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

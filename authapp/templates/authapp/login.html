@@ -1,0 +1,27 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+
+{% block main %}
+<div class="center">
+    <form method="post" class="login_form">
+        {% csrf_token %}
+        {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        {% if log_form %}
+
+        {{ log_form.as_p }}
+
+        {% endif %}
+        <input type="submit" value="Login" class="btn btn-primary">
+        <a href="{% url 'auth:login' %}" class="btn btn-secondary">Reset form</a>
+        <a href="{% url 'main:main' %}" class="btn btn-warning">Back to main</a>
+    </form>
+</div>
+{% endblock %}

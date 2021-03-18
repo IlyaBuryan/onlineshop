@@ -1,0 +1,22 @@
+<ul class="admin-menu">
+    <li>
+        <a href="{% url 'main:main' %}" class="btn btn-primary">
+            Main page
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'useradmin:users_read' %}"
+            class="{% if request.resolver_match.url_name == 'users_read' %} active {% endif %} btn btn-primary">
+            Users
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'useradmin:categories_read' %}"
+            class="{% if request.resolver_match.url_name == 'categories_read' or category.name %} active {% endif %} btn btn-primary">
+            Categories
+            {% if category %}
+            :<span>{{ category.name }}</span>
+            {% endif %}
+        </a>
+    </li>
+</ul>

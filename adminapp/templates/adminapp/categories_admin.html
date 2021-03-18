@@ -1,0 +1,67 @@
+{% extends 'adminapp/layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+{% block main %}
+
+{% if title == 'admin:categories' %}
+<div class="container">
+    <div class="categories_list">
+        <button class="btn btn-success new-user-button">
+            <a href="{% url 'useradmin:categories_create' %}">New category</a>
+        </button>
+        {% for object in object_list %}
+        <div class="category_record">
+            <div class="category_desc">
+                <div class="category_name">
+                    <span>{{ object.name|title }}</span>
+                    <span>{{ object.description|capfirst }}</span>
+                </div>
+            </div>
+            <div class="category_buttons">
+                <a href="{% url 'useradmin:products_read' object.pk %}" class="btn btn-primary">Сategory:view</a>
+                <a href="{% url 'useradmin:categories_update' object.pk %}" class="btn btn-warning">Сategory:update</a>
+                <a href="{% url 'useradmin:categories_delete' object.pk %}" class="btn btn-danger">Сategory:delete</a>
+            </div>
+        </div>
+        {% endfor%}
+    </div>
+</div>
+{% endif %}
+
+{% if title == 'categories:creation' or title == 'categories:update' %}
+<div class="container category_use">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary form-control" type="submit" value="Save">
+    </form>
+    <button class="btn btn-warning form-control last">
+        <a href="{% url 'useradmin:categories_read' %}">
+            Back to categories
+        </a>
+    </button>
+</div>
+{% endif %}
+
+{% if title == 'categories:delete' %}
+<div class="container user_forms">
+    <div class="user_delete">
+        <span><b>Delete {{ object.name }}?</b></span>
+        <form action="{% url 'useradmin:categories_delete' object.pk %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="DELETE">
+        </form>
+        <button class="btn btn-warning">
+            <a href="{% url 'useradmin:categories_read' %}">
+                Cancel
+            </a>
+        </button>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

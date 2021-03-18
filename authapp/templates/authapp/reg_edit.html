@@ -1,0 +1,52 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+
+{% block main %}
+<div class="center">
+    <form method="post" class="login_form register" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if form %}
+
+        {% if user.avatar %}
+        <div class="ava_wrapper">
+            <img src="/media/{{ user.avatar }}" class="avatar">
+        </div>
+        {% endif %}
+
+        {% for i in form %}
+
+
+        {% if i.name == 'avatar' %}
+        <div class="ava_update">
+            {{ i.errors }}
+            <p>Your new picture</p>
+            {{ i }}
+        </div>
+
+        {% else %}
+        {% if i.name != 'password' %}
+        <p>
+            {{ i.errors }}
+            {{ i.label_tag }}
+            {{ i }}
+        </p>
+        {% endif %}
+        {% endif %}
+
+        {% endfor %}
+
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+
+        {% endif %}
+        <input type="submit" value="{{ title|capfirst }}" class="btn btn-primary">
+        <!--        <a href="{% url 'auth:register' %}" class="btn btn-secondary">Reset form</a>-->
+        <a href="{% url 'main:main' %}" class="btn btn-warning">Back to main</a>
+    </form>
+</div>
+{% endblock %}

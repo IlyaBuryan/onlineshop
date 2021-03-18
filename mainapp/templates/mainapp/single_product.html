@@ -1,0 +1,89 @@
+{% extends 'mainapp/layouts/layout.html' %}
+{% load static %}
+{% load medias %}
+
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+
+{% block prod_nav %}
+{% include 'mainapp/layouts/products_nav.html' %}
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="details-products">
+        <div class="details-slider">
+            <div class="slider-product">
+                <img src="{{ product.image|media_folder }}" alt="{{ product.name }}">
+            </div>
+        </div>
+        <div class="description">
+            <h3 class="big-bold">{{ product.name|capfirst }}</h3>
+            <br>
+            <p class="price">{{ product.price }}<span> $</span></p>
+            <a href="{% url 'basket:add' product.pk %}" class="red-button">
+                Purchase <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            <div class="description-text">
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="similar">
+        <div class="featured">
+            <div class="featured-menu">
+                <div class="choice">
+                    <a class="active">Similar products</a>
+                </div>
+                <a class="explore" href="{% url 'main:category' product.category.pk %}">Show all <img
+                        src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+            </div>
+            <div class="tab-content">
+
+                {% for i in simular %}
+                <div class="block">
+                    <a href="{% url 'main:single' i.pk %}">
+                        <div class="img_container">
+                            <img src="/media/{{ i.image }}" alt="product">
+                        </div>
+                        <div class="text">
+                            <h4>To the purchase</h4>
+                            <p>{{ i.category|title }}</p>
+                            <p>{{ i.name|capfirst }}</p>
+                            <p>{{ i.price }} $</p>
+                        </div>
+                    </a>
+                    <p>Product</p>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="reviews">
+        <a href="{% url 'main:reviews' product.pk %}">
+            <img src="{{ product.image|media_folder }}" alt="">
+            live your feedback >>>
+        </a>
+
+        <div class="comments">
+            {% for i in feedbacks %}
+            <div class="comment">
+                <div class="user">
+                    {{ i.user }}
+                </div>
+                <div class="comment-text">
+                    {{ i.comment }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

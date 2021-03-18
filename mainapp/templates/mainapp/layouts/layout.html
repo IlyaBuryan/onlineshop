@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/fav.png' %}" type="image/x-icon">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+        integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Scripts -->
+    <script src="{% static 'js/js.js' %}"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="up_block">
+            <header>
+                <div id="top-header">
+                    <div class="container header-container">
+                        <ul class="header-links pull-left">
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z" />
+                                    </svg>
+                                    +7 999 999 99 99
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
+                                    </svg>
+                                    Smail@email.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    </svg>
+                                    1234 New highway
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="header-links pull-right">
+                            {% if not user.is_authenticated %}
+                            <a href="{% url 'authapp:register' %}">Register</a>
+                            {% else %}
+                            <img src="/media/{{ user.avatar }}" class="avatar-main">
+                            <a href="#">Hello, {{ user.username|title }} </a>
+                            <a href="{% url 'authapp:edit' %}">Edit profile</a>
+                            {% endif %}
+                            <li>
+                                {% if not user.is_authenticated %}
+                                <a href="{% url 'auth:login' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                    </svg>
+                                    Log IN
+                                </a>
+                                {% else %}
+                                <a href="{% url 'auth:logout' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                    </svg>
+                                    Log OUT
+                                </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="header-logo col-md-4">
+                                <a href="{% url 'main:main' %}">
+                                    <img src="{% static 'img/logo.png' %}" alt="logo">
+                                </a>
+                            </div>
+                            <div class="header-search col-md-6">
+                                <form action="{% url 'main:search' %}" method="get">
+                                    <input class="input" type="search" placeholder="Search here" name='products'>
+                                    <input type="submit" class="search-btn" value="Search">
+                                </form>
+                            </div>
+                            <div class="header-ctn col-md-2">
+                                <div class="basket">
+                                    <a href="{% url 'basket:index' %}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="basket-pic" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6h-9.21z" />
+                                        </svg>
+                                        <span>Basket</span>
+                                        {% if user.is_authenticated %}
+                                        <div class="qty">
+                                            <span>
+                                                {{ user.basket_qt }}
+                                            </span>
+                                        </div>
+                                        {% endif %}
+                                    </a>
+                                </div>
+
+                                <div class="menu-toggle">
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="menu-pic" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                                        </svg>
+                                        <span>
+                                            Menu
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <nav id="navigation">
+                <div class="container">
+                    <div id="responsive-nav">
+                        <ul class="main-nav">
+                            <li><a href="{% url 'main:main' %}" class="{% if request.resolver_match.url_name == 'main' %}
+                  active
+                {% endif %}">Home</a></li>
+                            <li><a href="{% url 'main:products' %}" class="{% if request.resolver_match.url_name == 'products' or request.resolver_match.url_name == 'category' %}
+                  active
+                {% endif %}">Products</a></li>
+                            <li><a href="{% url 'main:contacts' %}" class="{% if request.resolver_match.url_name == 'contacts' %}
+                  active
+                {% endif %}">Store addresses</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            {% block prod_nav %}
+            {% endblock %}
+
+            <main>
+                {% block main %}
+                {% endblock %}
+            </main>
+        </div>
+
+        <div class="bottom_block">
+            <div id="newsletter">
+                <div class="container">
+                    <div class="row">
+                        <div class="newsletter">
+                            <p>Sign Up for the <strong>NEWSTELLER</strong></p>
+                            <form>
+                                <input class="input" type="email" placeholder="Enter Your Email">
+                                <input type="submit" class="search-btn" value="Subscribe">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer id="footer">
+                <div class="container">
+                    <div class="row">
+                        <ul class="main-nav">
+                            <li class="footer-title"><a href="{% url 'main:main' %}">Home</a></li>
+                            <li class="footer-title"><a href="{% url 'main:products' %}">Products</a></li>
+                            <li class="footer-title"><a href="{% url 'main:contacts' %}">Store addresses</a></li>
+                        </ul>
+                        <ul class="header-links footer-links">
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z" />
+                                    </svg>
+                                    +7 999 999 99 99
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
+                                    </svg>
+                                    Smail@email.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-pic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    </svg>
+                                    1234 New highway
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="bottom-footer">
+                    <div class="container">
+                        <span class="copyright">
+                            &copy;
+                            {% now "Y M" %}
+                            All rights reserved |
+                            BIV
+                        </span>
+                        <span class="admin_enter">
+                            {% if user.is_superuser %}
+                            <a href="{% url 'useradmin:users_read' %}">amin</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+
+<div class="basket-summary">
+    {{ user.basket_qt }} items =
+    {{ user.basket_price }} $
+</div>
+
+{% if basket %}
+{% for i in basket %}
+<div class="basket-record">
+    <div class="img-wrap">
+        <a href="{% url 'main:single' i.product.pk %}">
+            <img src="/media/{{ i.product.image }}" alt="{{ i.product.name }}">
+        </a>
+    </div>
+
+    <div class="basket-content">
+        <span class="category-name">{{ i.product.category.name|title }}</span>
+        <span class="product-name">{{ i.product.name|capfirst }}</span>
+        <span class="product-price">{{ i.product.price }}&nbsp;$</span>
+        <input type="number" name="{{ i.pk }}" min="0" max="{{ i.product.quantity }}" value="{{ i.quantity }}">
+        <span class="product-cost">{{ i.product_cost }}&nbsp;$</span>
+
+        <a href="{% url 'basket:remove' i.pk %}" class="btn btn-round">
+            delete
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+<h4>The basket is empty</h4>
+{% endif %}
+
+<a href="{% url 'main:main' %}" class="btn btn-primary basket-btn">
+    To the main page
+</a>

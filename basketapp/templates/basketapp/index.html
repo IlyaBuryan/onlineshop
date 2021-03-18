@@ -1,0 +1,16 @@
+{% extends 'basketapp/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ titile|capfirst}}
+{% endblock %}
+
+{% block main %}
+
+<h3 class="basket-headline">Your basket, {{ user.username }}</h3>
+
+<div class="basket-list">
+{% include 'basketapp/basket_list.html' %}
+</div>
+
+{% endblock %}
