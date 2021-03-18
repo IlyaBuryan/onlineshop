@@ -239,7 +239,7 @@
                             BIV
                         </span>
                     <span class="admin_enter">
-                            {% if user.is_superuser %}
+                            {% if user.is_authenticated %}
                             <a href="{% url 'useradmin:users_read' %}">amin</a>
                             {% endif %}
                         </span>
