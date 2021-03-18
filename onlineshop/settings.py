@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'onlineshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'geekshop',
+        'NAME': 'onlineshop',
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
     }
