@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'NAME': 'geekshop',
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'adminuser',
+        'USER': 'postgres',
     }
 }
 
