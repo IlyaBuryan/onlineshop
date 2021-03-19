@@ -115,7 +115,7 @@ class SuccessUrlMixin:
         })
 
 
-class UsersListView(CheckSuperuserMixin, ContextDataMixin, ListView):
+class UsersListView(CheckAuthMixin, ContextDataMixin, ListView):
     model = get_user_model()
     queryset = get_user_model().objects.all().order_by('-is_active',
                                                        'username')
@@ -123,14 +123,14 @@ class UsersListView(CheckSuperuserMixin, ContextDataMixin, ListView):
     title = 'admin:users'
 
 
-class UsersCreate(CheckSuperuserMixin, ContextDataMixin, CreateView):
+class UsersCreate(CheckAuthMixin, ContextDataMixin, CreateView):
     form_class = ShopUserAdminCreateForm
     template_name = 'adminapp/user_admin.html'
     title = 'users:creation'
     success_url = reverse_lazy('useradmin:users_read')
 
 
-class UsersUpdate(CheckSuperuserMixin, UpdateView):
+class UsersUpdate(CheckAuthMixin, UpdateView):
     form_class = ShopUserAdminUpdateForm
     template_name = 'adminapp/user_admin.html'
     success_url = reverse_lazy('useradmin:users_read')
@@ -147,7 +147,7 @@ class UsersUpdate(CheckSuperuserMixin, UpdateView):
         return get_user_model().objects.all()
 
 
-class UsersDelete(CheckSuperuserMixin, ContextDataMixin, DeleteView):
+class UsersDelete(CheckAuthMixin, ContextDataMixin, DeleteView):
     model = get_user_model()
     template_name = 'adminapp/user_admin.html'
     title = 'users:delete'
@@ -180,7 +180,7 @@ def categories_read(request):
 """
 
 
-class CategoriesListView(CheckSuperuserMixin, ContextDataMixin, ListView):
+class CategoriesListView(CheckAuthMixin, ContextDataMixin, ListView):
     model = Category
     template_name = 'adminapp/categories_admin.html'
     title = 'admin:categories'
@@ -204,7 +204,7 @@ class CategoriesUpdate(CheckSuperuserMixin, ContextDataMixin, UpdateView):
     pk_url_kwarg = 'category_pk'
 
 
-class CategoriesDelete(CheckAuthMixin, ContextDataMixin, DeleteView):
+class CategoriesDelete(CheckSuperuserMixin, ContextDataMixin, DeleteView):
     model = Category
     title = 'categories:delete'
     fields = '__all__'
@@ -234,7 +234,7 @@ def products_read(request, category_pk):
 """
 
 
-class ProductsListView(CheckSuperuserMixin, ListView):
+class ProductsListView(CheckAuthMixin, ListView):
     model = Product
     template_name = 'adminapp/products_admin.html'
 
@@ -287,7 +287,7 @@ class ProductsUpdate(CheckSuperuserMixin, SuccessUrlMixin, UpdateView):
         return context
 
 
-class ProductsDelete(CheckAuthMixin, SuccessUrlMixin, DeleteView):
+class ProductsDelete(CheckSuperuserMixin, SuccessUrlMixin, DeleteView):
     model = Product
     fields = '__all__'
     template_name = 'adminapp/products_admin.html'
@@ -301,7 +301,7 @@ class ProductsDelete(CheckAuthMixin, SuccessUrlMixin, DeleteView):
         return context
 
 
-class ProductView(CheckSuperuserMixin, ContextDataMixin, DetailView):
+class ProductView(CheckAuthMixin, ContextDataMixin, DetailView):
     model = Product
     title = 'product'
     template_name = 'adminapp/single_product.html'
