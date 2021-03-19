@@ -92,6 +92,12 @@ class CheckSuperuserMixin:
         return super().dispatch(*args, **kwargs)
 
 
+class CheckAuthMixin:
+    @method_decorator(user_passes_test(lambda u: u.is_authenticated))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
 class ContextDataMixin:
     title = ''
 
@@ -198,7 +204,7 @@ class CategoriesUpdate(CheckSuperuserMixin, ContextDataMixin, UpdateView):
     pk_url_kwarg = 'category_pk'
 
 
-class CategoriesDelete(CheckSuperuserMixin, ContextDataMixin, DeleteView):
+class CategoriesDelete(CheckAuthMixin, ContextDataMixin, DeleteView):
     model = Category
     title = 'categories:delete'
     fields = '__all__'
@@ -281,7 +287,7 @@ class ProductsUpdate(CheckSuperuserMixin, SuccessUrlMixin, UpdateView):
         return context
 
 
-class ProductsDelete(CheckSuperuserMixin, SuccessUrlMixin, DeleteView):
+class ProductsDelete(CheckAuthMixin, SuccessUrlMixin, DeleteView):
     model = Product
     fields = '__all__'
     template_name = 'adminapp/products_admin.html'
