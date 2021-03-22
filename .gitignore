@@ -1,1 +1,5 @@
 /db.sqlite3
+/json/authapp_dump.json
+/json/final_dump.json
+/json/full_dump.json
+/json/mainapp_dump.json

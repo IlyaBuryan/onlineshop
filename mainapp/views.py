@@ -27,12 +27,10 @@ def get_hot_product():
 
 def products(request):
     hot = get_hot_product()
-    categories_list = Category.objects.all()
     other = Product.objects.all().exclude(name=f'{hot.name}').order_by('?')[:10]
 
     context = {
         'title': 'Products',
-        'categories_list': categories_list,
         'product_hot': hot,
         'other': other,
     }
@@ -41,7 +39,6 @@ def products(request):
 
 def category(request, pk):
     page = request.GET.get('page', 1)
-    categories_list = Category.objects.all()
     if pk == 0:
         title = 'All products'
         products = Product.objects.all()
@@ -64,7 +61,6 @@ def category(request, pk):
 
     context = {
         'title': title,
-        'categories_list': categories_list,
         'products': products_paginator,
         'category': category,
     }
@@ -72,14 +68,12 @@ def category(request, pk):
 
 
 def single(request, pk):
-    categories_list = Category.objects.all()
     product = get_object_or_404(Product, pk=pk)
     simular = product.category.product_set.all().exclude(name=f'{product.name}').order_by('?')[:5]
     feedbacks = product.comment_set.all()
 
     context = {
         'title': product.name,
-        'categories_list': categories_list,
         'product': product,
         'simular': simular,
         'feedbacks': feedbacks,
@@ -90,7 +84,6 @@ def single(request, pk):
 
 @login_required
 def reviews(request, pk):
-    categories_list = Category.objects.all()
     product = get_object_or_404(Product, pk=pk)
 
     if request.method == 'POST':
@@ -103,7 +96,6 @@ def reviews(request, pk):
 
     context = {
         'title': product.name,
-        'categories_list': categories_list,
         'product': product,
         'form': form
     }
@@ -127,8 +119,6 @@ def search(request):
     text = request.GET.get('products')
     page = request.GET.get('page', 1)
 
-    categories_list = Category.objects.all()
-
     if text:
         products = Product.objects.filter(name__contains=f'{text}')
     else:
@@ -145,7 +135,6 @@ def search(request):
     context = {
         'title': 'search',
         'products': products_paginator,
-        'categories_list': categories_list,
         'text': text,
     }
 
