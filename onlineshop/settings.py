@@ -133,3 +133,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'authapp.OnlineshopUser'
 
 LOGIN_URL = '/auth/login/'
+
+DOMAIN_NAME = '89.108.71.100:8001'
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'online-shop-registreation@mail.ru'
+EMAIL_HOST_PASSWORD = '4253316admin'
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False

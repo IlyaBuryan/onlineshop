@@ -929,6 +929,10 @@ li {
   height: 100vh;
 }
 
+.verification {
+  flex-direction: column;
+}
+
 .login_form {
   max-width: 40%;
   min-width: 250px;

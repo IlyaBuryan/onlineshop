@@ -1,3 +1,6 @@
+import hashlib
+import random
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, forms
 
@@ -33,6 +36,17 @@ class RegisterForm(UserCreationForm):
 
         if age < 18 or age > 150:
             self.add_error('age', 'Check the age. 18 is the minimum.')
+
+    def save(self):
+        user = super().save()
+
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+        user.activ_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        user.save()
+
+        return user
+
 
 
 class EditForm(UserChangeForm):

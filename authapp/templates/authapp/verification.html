@@ -1,0 +1,21 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title|capfirst }}
+{% endblock %}
+
+
+{% block main %}
+<div class="center verification">
+    {% if user %}
+    <h3>Congratulations!</h3>
+    <br>
+    <h4>User {{user.username}} accepted.</h4>
+    {% else %}
+    <h3>Verification error.</h3>
+    {% endif %}
+    <br>
+    <a href="{% url 'main:main' %}" class="btn btn-primary">To the main page</a>
+</div>
+{% endblock %}

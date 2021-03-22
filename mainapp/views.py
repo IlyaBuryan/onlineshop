@@ -127,9 +127,6 @@ def search(request):
     text = request.GET.get('products')
     page = request.GET.get('page', 1)
 
-    print(request.GET)
-    print(text)
-    print(page)
     categories_list = Category.objects.all()
 
     if text:
