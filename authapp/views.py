@@ -43,6 +43,7 @@ def register(request):
         form = RegisterForm(request.POST, request.FILES)
 
         if form.is_valid():
+            request.user.login()
             form.save()
             return redirect(reverse('main:main'))
     else:

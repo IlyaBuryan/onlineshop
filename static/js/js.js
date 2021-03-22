@@ -1,16 +1,13 @@
 "use strict"
 
-window.onload = (function () {
+// Mobile Nav toggle
+$('.menu-toggle > a').on('click', function (event) {
+    event.preventDefault();
+    $('#responsive-nav').toggleClass('active');
+    $('#responsive-nav-products').toggleClass('active');
+})
 
-	// Mobile Nav toggle
-	$('.menu-toggle > a').on('click', function (event) {
-		event.preventDefault();
-		$('#responsive-nav').toggleClass('active');
-		$('#responsive-nav-products').toggleClass('active');
-	})
-
-	// Fix cart dropdown from closing
-	$('.cart-dropdown').on('click', function (event) {
-		event.stopPropagation();
-	});
+// Fix cart dropdown from closing
+$('.cart-dropdown').on('click', function (event) {
+    event.stopPropagation();
 });

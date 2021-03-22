@@ -19,7 +19,7 @@ class RegisterForm(UserCreationForm):
             'email',
             'age',
             'city',
-            'avatar'
+            'avatar',
         ]
 
     def __init__(self, *args, **kwargs):
