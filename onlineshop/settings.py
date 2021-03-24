@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import json
 from pathlib import Path
 import os
 
@@ -137,9 +137,12 @@ LOGIN_URL = '/auth/login/'
 
 DOMAIN_NAME = '89.108.71.100:8001'
 
+with open('json/pass.json', 'r', encoding='utf-8') as pass_file:
+    passwords = json.load(pass_file)
+
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'online-shop-registreation@mail.ru'
-EMAIL_HOST_PASSWORD = '4253316admin'
+EMAIL_HOST_USER = f"{passwords['EMAIL_HOST_USER']}"
+EMAIL_HOST_PASSWORD = f"{passwords['EMAIL_HOST_PASSWORD']}"
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False

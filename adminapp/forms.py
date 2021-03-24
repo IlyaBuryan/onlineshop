@@ -5,7 +5,7 @@ from authapp.forms import EditForm, UserCreationForm
 class ShopUserAdminUpdateForm(EditForm):
     class Meta:
         model = get_user_model()
-        exclude = ('user_permissions', 'groups', 'last_login')
+        exclude = ('user_permissions', 'groups', 'last_login', 'email', 'activ_key', 'activ_key_expires')
 
 
 class ShopUserAdminCreateForm(UserCreationForm):
