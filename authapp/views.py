@@ -12,8 +12,8 @@ def send_verify_mail(user):
 
     title = f'User confirmation: {user.username}'
 
-    # message = f'To confirm {user.username} on the {settings.DOMAIN_NAME}move: \n\n{settings.DOMAIN_NAME}{verify_link}'
-    message = f'To confirm {user.username} on the {settings.DOMAIN_NAME}move: \n\nhttp://127.0.0.1:8000{verify_link}'
+    message = f'To confirm {user.username} on the {settings.DOMAIN_NAME}move: \n\n{settings.DOMAIN_NAME}{verify_link}'
+    # message = f'To confirm {user.username} on the {settings.DOMAIN_NAME}move: \n\nhttp://127.0.0.1:8000{verify_link}'
 
     return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 

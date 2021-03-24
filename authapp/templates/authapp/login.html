@@ -13,7 +13,10 @@
         {% if next %}
         <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
-
+        <a href="{% url 'social:begin' 'google-oauth2' %}?next=/" class="btn btn-danger">
+            Google sign in
+        </a>
+        <br> <br>
         {% if log_form %}
 
         {{ log_form.as_p }}

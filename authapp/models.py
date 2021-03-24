@@ -6,7 +6,7 @@ from django.utils.timezone import now
 
 
 class OnlineshopUser(AbstractUser):
-    age = models.PositiveSmallIntegerField(verbose_name='age')
+    age = models.PositiveSmallIntegerField(verbose_name='age', default=20)
     city = models.CharField(verbose_name='city', max_length=50, blank=True)
     avatar = models.ImageField(verbose_name='your picture', upload_to='avatars', blank=True)
     email = models.EmailField(default=None, blank=False)

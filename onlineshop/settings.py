@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'te234ej^1m#u4gx0r4x39(&&5g41y35g43h543532485gfdsg#$%^_^fdsf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'authapp',
     'basketapp',
     'adminapp',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -77,15 +78,15 @@ WSGI_APPLICATION = 'onlineshop.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'NAME': 'onlineshop',
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'USER': 'postgres',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
+        'NAME': 'onlineshop',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
 }
 
 # Password validation
@@ -146,3 +147,16 @@ EMAIL_HOST_USER = f"{passwords['EMAIL_HOST_USER']}"
 EMAIL_HOST_PASSWORD = f"{passwords['EMAIL_HOST_PASSWORD']}"
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
+
+
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = f"{passwords['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']}"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = f"{passwords['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']}"
