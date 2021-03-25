@@ -1,0 +1,20 @@
+{% if object.status == 'FM' %}
+<div class="up_margin">
+    <button class="btn btn-success btn-round">
+        <a href="{% url 'order:order_forming_complete' object.pk %}" class="white">
+            Make a purchase
+        </a>
+    </button>
+    <button class="btn btn-danger btn-round">
+        <a href="{% url 'order:order_delete' object.pk %}" class="white">Delete</a>
+    </button>
+    {% endif %}
+    <button class="btn btn-warning btn-round">
+        <a href="{% url 'order:orders_list' %}">
+            To the list of orders
+        </a>
+    </button>
+    <button class="btn btn-primary btn-round white">
+        <a href="{% url 'main:main' %}" class="white">To the main</a>
+    </button>
+</div>

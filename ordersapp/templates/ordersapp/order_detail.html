@@ -1,0 +1,31 @@
+{% extends "ordersapp/base.html" %}
+{% load static %}
+{% load medias %}
+
+{% block main %}
+<div class="container up_margin">
+    {% include 'ordersapp/layout/inc_order_summary.html' %}
+    <div>
+        {% for item in object.orderitems.select_related %}
+        <div class="basket_record">
+            <img src="{{ item.product.image|media_folder }}"
+                 alt="{{ item.product.name }}" class="single_product_img">
+            <span>
+                   {{ item.product.category.name }}
+               </span>
+            <span>{{ item.product.name }}</span>
+            <span>
+                   {{ item.product.price }}&nbsp$
+               </span>
+            <span>
+                   x {{ item.quantity }} items.
+               </span>
+            <span>
+                    = {{ item.get_product_cost }}&nbsp$
+               </span>
+        </div>
+        {% endfor %}
+    </div>
+    {% include 'ordersapp/layout/inc_order_actions.html' %}
+</div>>
+{% endblock %}

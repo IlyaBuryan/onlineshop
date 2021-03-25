@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {{ title|title }}
+        {% endblock %}
+    </title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/fav.png' %}" type="image/x-icon">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.js' %}" defer></script>
+    <script src="{% static 'js/orders_scripts.js' %}" defer></script>
+    <script src="{% static 'js/js.js' %}" defer></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="up_block">
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+    </div>
+    <div class="bottom_block">
+    </div>
+</div>
+
+</body>
+
+</html>

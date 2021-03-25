@@ -1025,6 +1025,34 @@ li {
   display: none;
 }
 
+/*----------------------------*\
+	Orders
+\*----------------------------*/
+
+.up_margin {
+  margin-top: 40px;
+}
+
+.white {
+  color: white;
+}
+
+.basket_record {
+  display: flex;
+}
+
+.basket_record span {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.basket_record .single_product_img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
 @media (max-width: 750px) {
   .login_form {
     max-width: 80%;
