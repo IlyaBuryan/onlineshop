@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.db import transaction
 from django.forms import inlineformset_factory
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -9,6 +10,7 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_save, pre_delete
 
 from basketapp.models import Basket
+from mainapp.models import Product
 from .forms import OrderItemForm
 from .models import Order, OrderItem
 
@@ -90,12 +92,16 @@ class OrderItemsCreate(CheckAuthMixin, ContextDataMixin, CreateView):
 class OrderItemsUpdate(CheckAuthMixin, ContextDataMixin, UpdateView):
     model = Order
     fields = []
-    success_url = reverse_lazy('order:orders_list')
     title = 'order'
+
+    def get_success_url(self):
+        return reverse_lazy('order:order_update', kwargs={
+            'pk': self.object.pk,
+        })
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=3)
+        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
 
         # Первый позиционный аргумент - родительский класс, второй - класс, на основе которого
         # будет создаваться набор форм класса, указанного в именованномаргументе «form = OrderItemForm».
@@ -164,3 +170,11 @@ def product_quantity_update_save(sender, update_fields, instance, **kwargs):
 def product_quantity_update_delete(sender, instance, **kwargs):
     instance.product.number += instance.quantity
     instance.product.save()
+
+
+def get_prod_price(request, pk):
+    if request.is_ajax():
+        product_item = Product.objects.filter(pk=int(pk)).first()
+        if product_item:
+            return JsonResponse({'price': product_item.price})
+        return JsonResponse({'price': 0})
