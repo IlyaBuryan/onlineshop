@@ -31,7 +31,17 @@
                         {% endfor %}
                         {% endif %}
                         {{ field.errors.as_ul }}
+
+                        {% if field.name != 'price' %}
                         {{ field }}
+                        {% else %}
+                        {% if field.value %}
+                        <span class="orderitems-{{forloop.parentloop.counter0}}-price">
+                            {{ field.value }}
+                        </span> $
+                        {% endif %}
+                        {% endif %}
+
                     </td>
                     {% endfor %}
                 </tr>
@@ -41,8 +51,9 @@
             </button>
         </form>
         <div class="up_margin row">
-        {% include 'ordersapp/layout/inc_order_actions.html' %}
-        </div>>
+            {% include 'ordersapp/layout/inc_order_actions.html' %}
+        </div>
+        >
     </div>
 </div>>
 {% endblock %}

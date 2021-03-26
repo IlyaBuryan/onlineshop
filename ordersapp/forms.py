@@ -9,6 +9,7 @@ class OrderForm(forms.ModelForm):
 
 
 class OrderItemForm(forms.ModelForm):
+    price = forms.CharField(label='Price', required=False)
     class Meta:
         model = OrderItem
         fields = '__all__'
