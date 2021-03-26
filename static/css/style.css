@@ -1039,6 +1039,7 @@ li {
 
 .basket_record {
   display: flex;
+  justify-content: space-between;
 }
 
 .basket_record span {
