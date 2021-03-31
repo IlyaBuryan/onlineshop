@@ -47,7 +47,7 @@ def category(request, pk):
             'name': 'all',
         }
     else:
-        products = Product.objects.filter(category__id=pk).order_by('?')
+        products = Product.objects.filter(category__id=pk)
         category = get_object_or_404(Category, pk=pk)
         title = category
 
